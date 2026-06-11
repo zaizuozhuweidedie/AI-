@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// 用户模型
+model User {
+  id            String   @id @default(cuid())
+  name          String?
+  email         String?  @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String? // 密码登录
+
+  accounts      Account[]
+  sessions      Session[]
+
+  decks         Deck[]
+  cards         Card[]
+  reviewLogs    ReviewLog[]
+  studySessions StudySession[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+/// NextAuth 账号关联
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+/// NextAuth 会话
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+/// VerificationToken（NextAuth 邮件验证）
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+/// 卡组
+model Deck {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  color       String?  @default("#6366f1") // 卡组颜色标签
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cards       Card[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+}
+
+/// 卡片
+model Card {
+  id          String   @id @default(cuid())
+  front       String   @db.Text         // 卡片正面（问题/术语）
+  back        String   @db.Text         // 卡片背面（答案/解释）
+  tags        String    @default("[]")    // 标签（JSON数组格式）
+
+  deckId      String
+  deck        Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // SM-2 间隔重复算法字段
+  easeFactor  Float    @default(2.5)    // 难度系数
+  interval    Int      @default(0)      // 间隔天数
+  repetitions Int      @default(0)      // 连续正确次数
+  nextReviewAt DateTime @default(now()) // 下次复习时间
+  lastReviewAt  DateTime?               // 上次复习时间
+
+  reviewLogs  ReviewLog[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, nextReviewAt])
+  @@index([deckId])
+}
+
+/// 复习记录
+model ReviewLog {
+  id          String   @id @default(cuid())
+  cardId      String
+  card        Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 用户评分: 1=Again, 2=Hard, 3=Good, 4=Easy
+  quality     Int
+  // 当时的算法状态快照
+  easeFactor  Float
+  interval    Int
+  repetitions Int
+  // 复习耗时（秒）
+  timeSpent   Int?
+  reviewedAt  DateTime @default(now())
+
+  @@index([userId, reviewedAt])
+  @@index([cardId])
+}
+
+/// 学习会话
+model StudySession {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deckId       String?  // 如果 null 则表示对所有待复习卡片的随机学习
+  cardsStudied Int      @default(0)
+  correctCount Int      @default(0) // quality >= 3 的计数
+  duration     Int?     // 时长（秒）
+  startedAt    DateTime @default(now())
+  endedAt      DateTime?
+}

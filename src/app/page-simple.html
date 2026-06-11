@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CardWise - AI 学习助手</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950 text-white">
+    <!-- Nav -->
+    <nav class="border-b border-white/10">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center text-white font-bold text-sm">C</div>
+          <span class="text-xl font-bold">CardWise</span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#features" class="text-sm text-slate-300 hover:text-white transition">功能</a>
+          <a href="#demo" class="text-sm text-slate-300 hover:text-white transition">演示</a>
+          <a href="#cta" class="px-5 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-sm font-semibold transition">开始使用</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-6 pt-28 pb-24 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-sm text-indigo-300 mb-8">
+        🧠 AI 驱动的智能学习工具
+      </div>
+      <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+        用 AI 生成卡片
+        <br />
+        <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">科学记忆一切</span>
+      </h1>
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        粘贴笔记、文章或链接，AI 自动生成 Flashcards。<br />
+        配合间隔重复算法，让你记得更牢、学得更快。
+      </p>
+      <div class="flex items-center justify-center gap-4">
+        <a href="#cta" class="px-8 py-3.5 bg-indigo-500 hover:bg-indigo-400 rounded-xl font-semibold text-lg transition shadow-lg shadow-indigo-500/25">免费开始学习 →</a>
+        <a href="#demo" class="px-8 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl font-semibold text-lg transition">查看演示</a>
+      </div>
+
+      <!-- Preview -->
+      <div class="mt-20 max-w-4xl mx-auto">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-1">
+          <div class="bg-slate-900 rounded-xl p-8 flex items-center justify-center min-h-[300px]">
+            <div class="text-center">
+              <div class="inline-block bg-slate-800 rounded-2xl p-8 shadow-2xl max-w-md w-full">
+                <div class="text-7xl mb-4">🧠</div>
+                <p class="text-lg font-medium mb-2">什么是间隔重复？</p>
+                <p class="text-sm text-slate-400">间隔重复是一种基于遗忘曲线的学习方法，通过在最佳时间点复习，让你的记忆效率最大化。</p>
+                <div class="mt-6 flex justify-center gap-3">
+                  <span class="px-4 py-2 bg-red-500/20 text-red-400 rounded-lg text-sm">Again</span>
+                  <span class="px-4 py-2 bg-orange-500/20 text-orange-400 rounded-lg text-sm">Hard</span>
+                  <span class="px-4 py-2 bg-green-500/20 text-green-400 rounded-lg text-sm">Good</span>
+                  <span class="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg text-sm">Easy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="max-w-6xl mx-auto px-6 py-24">
+      <h2 class="text-3xl font-bold text-center mb-16">为什么选择 CardWise？</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center text-2xl mb-5">🤖</div>
+          <h3 class="text-xl font-semibold mb-3">AI 自动生成</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">粘贴文本、文章链接甚至 PDF，AI 自动提取知识点并生成 Flashcards。再也不用手动一张张做卡片。</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl mb-5">📐</div>
+          <h3 class="text-xl font-semibold mb-3">科学记忆算法</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">基于 SM-2 间隔重复算法（Anki 同款），在最佳时间点提醒你复习，记忆效率提高 3 倍。</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center text-2xl mb-5">📊</div>
+          <h3 class="text-xl font-semibold mb-3">学习数据可视化</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">热力图、掌握曲线、复习统计——清晰看到自己的进步，保持学习动力。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="max-w-3xl mx-auto px-6 py-24 text-center">
+      <div class="bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-3xl p-12">
+        <h2 class="text-3xl font-bold mb-4">准备好提升学习效率了吗？</h2>
+        <p class="text-slate-400 mb-8">免费注册，立即体验 AI 驱动的智能学习。</p>
+        <a href="/auth/register" class="inline-block px-8 py-3.5 bg-indigo-500 hover:bg-indigo-400 rounded-xl font-semibold text-lg transition shadow-lg shadow-indigo-500/25">免费注册 →</a>
+        <p class="text-sm text-slate-500 mt-4">已有账号？<a href="/auth/login" class="text-indigo-400 hover:text-indigo-300">登录</a></p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 text-center text-sm text-slate-500">
+      CardWise &mdash; AI 学习助手
+    </footer>
+  </div>
+</body>
+</html>
