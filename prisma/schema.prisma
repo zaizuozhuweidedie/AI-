@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -87,7 +87,7 @@ model Card {
   id          String   @id @default(cuid())
   front       String   @db.Text         // 卡片正面（问题/术语）
   back        String   @db.Text         // 卡片背面（答案/解释）
-  tags        String    @default("[]")    // 标签（JSON数组格式）
+  tags        String[]  @default([])      // 标签数组
 
   deckId      String
   deck        Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)

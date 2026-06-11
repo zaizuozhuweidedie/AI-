@@ -110,27 +110,19 @@ export async function getDeck(deckId: string) {
 // Card 操作
 // ============================================================
 
-// Helper: 反序列化 tags（MySQL 下存的是 JSON 字符串）
-function parseCard(card: any) {
-  if (typeof card.tags === 'string') {
-    try { card.tags = JSON.parse(card.tags) } catch { card.tags = [] }
-  }
-  return card
-}
-
 export async function createCard(input: CreateCardInput) {
   const userId = await getUserId()
   const card = await prisma.card.create({
     data: {
       front: input.front,
       back: input.back,
-      tags: JSON.stringify(input.tags || []),
+      tags: input.tags || [],
       deckId: input.deckId,
       userId,
     },
   })
   revalidatePath(`/dashboard/decks/${input.deckId}`)
-  return parseCard(card)
+  return card
 }
 
 export async function updateCard(input: { id: string; front?: string; back?: string; tags?: string[] }) {
@@ -143,11 +135,11 @@ export async function updateCard(input: { id: string; front?: string; back?: str
     data: {
       ...(input.front !== undefined && { front: input.front }),
       ...(input.back !== undefined && { back: input.back }),
-      ...(input.tags !== undefined && { tags: JSON.stringify(input.tags) }),
+      ...(input.tags !== undefined && { tags: input.tags }),
     },
   })
   revalidatePath(`/dashboard/decks/${updated.deckId}`)
-  return parseCard(updated)
+  return updated
 }
 
 export async function deleteCard(cardId: string) {
@@ -164,7 +156,7 @@ export async function getCards(deckId: string) {
     where: { deckId, userId },
     orderBy: { createdAt: 'desc' },
   })
-  return cards.map(parseCard)
+  return cards
 }
 
 export async function getDueCards(deckId?: string) {
@@ -181,7 +173,7 @@ export async function getDueCards(deckId?: string) {
     include: { deck: { select: { id: true, name: true, color: true } } },
     orderBy: [{ easeFactor: 'asc' }, { nextReviewAt: 'asc' }],
   })
-  return cards.map(parseCard)
+  return cards
 }
 
 // ============================================================
