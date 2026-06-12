@@ -22,25 +22,24 @@ export default async function DeckPage({ params }: Props) {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex items-start justify-between">
         <div>
           <Link
             href="/dashboard/decks"
-            className="text-sm text-slate-500 hover:text-slate-300 transition mb-2 inline-block"
+            className="text-sm text-gray-500 hover:text-gray-700 transition mb-2 inline-block"
           >
             ← 返回卡组列表
           </Link>
-          <h1 className="text-3xl font-bold text-white">{deck.name}</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{deck.name}</h1>
           {deck.description && (
-            <p className="text-slate-400 mt-1">{deck.description}</p>
+            <p className="text-gray-500 mt-1">{deck.description}</p>
           )}
-          <p className="text-sm text-slate-500 mt-1">{deck._count.cards} 张卡片</p>
+          <p className="text-sm text-gray-400 mt-1">{deck._count.cards} 张卡片</p>
         </div>
         <div className="flex items-center gap-3">
           <Link
             href={`/dashboard/decks/${deckId}/study`}
-            className="px-5 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white font-medium transition text-sm"
+            className="px-5 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg text-white font-medium transition text-sm"
           >
             开始学习
           </Link>
@@ -48,10 +47,7 @@ export default async function DeckPage({ params }: Props) {
         </div>
       </div>
 
-      {/* AI Generator */}
       <AIGenerator deckId={deckId} />
-
-      {/* Cards */}
       <CardList cards={cards} deckId={deckId} />
     </div>
   )

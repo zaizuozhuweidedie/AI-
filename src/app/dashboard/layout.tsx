@@ -12,7 +12,7 @@ export default async function DashboardLayout({
   if (!session?.user) redirect('/auth/login')
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-white">
       <DashboardNav user={session.user} />
       <div className="flex">
         <DashboardSidebar />
