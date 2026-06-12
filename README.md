@@ -176,14 +176,14 @@ npx prisma db push
 npm run dev
 ```
 
-打开 http://localhost:3000 即可体验。
+打开 [https://ai-l4v3gksxy-shihua-s-projects1.vercel.app](https://ai-l4v3gksxy-shihua-s-projects1.vercel.app) 即可体验。
 
 ### 环境变量
 
 ```env
 DATABASE_URL="postgresql://user:pass@host:5432/db"
 AUTH_SECRET="your-random-secret"
-AUTH_URL="http://localhost:3000"
+AUTH_URL="https://ai-l4v3gksxy-shihua-s-projects1.vercel.app"
 
 # AI 生成（二选一，不配则使用示例卡片）
 ANTHROPIC_API_KEY="sk-ant-..."
