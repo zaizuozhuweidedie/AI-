@@ -168,19 +168,23 @@ export default function StudyView({ cards: initialCards, decks }: StudyViewProps
       </div>
 
       <div className="perspective">
-        <div className="relative bg-white border border-gray-300 rounded-2xl min-h-[300px] cursor-pointer shadow-md" onClick={() => !flipped && setFlipped(true)}>
+        <div
+          className="relative rounded-2xl min-h-[300px] cursor-pointer shadow-md"
+          style={{ backgroundColor: currentCard.deck.color || '#e5e7eb' }}
+          onClick={() => !flipped && setFlipped(true)}
+        >
           <div className={`absolute inset-0 p-8 flex flex-col items-center justify-center transition-opacity duration-300 ${flipped ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-            <div className="text-sm text-gray-400 mb-3">{currentCard.deck.name}</div>
-            <p className="text-xl text-gray-900 text-center leading-relaxed max-w-lg">{currentCard.front}</p>
-            <p className="text-sm text-gray-400 mt-8">点击翻转查看答案</p>
+            <div className="text-sm text-white/70 mb-3">{currentCard.deck.name}</div>
+            <p className="text-xl text-white text-center leading-relaxed max-w-lg">{currentCard.front}</p>
+            <p className="text-sm text-white/60 mt-8">点击翻转查看答案</p>
           </div>
           <div className={`p-8 flex flex-col items-center justify-center min-h-[300px] transition-opacity duration-300 ${flipped ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-            <div className="text-sm text-gray-400 mb-3">答案</div>
-            <p className="text-lg text-gray-900 text-center leading-relaxed max-w-lg whitespace-pre-wrap">{currentCard.back}</p>
+            <div className="text-sm text-white/70 mb-3">答案</div>
+            <p className="text-lg text-white text-center leading-relaxed max-w-lg whitespace-pre-wrap">{currentCard.back}</p>
             {currentCard.tags.length > 0 && (
               <div className="flex gap-1 mt-4">
                 {currentCard.tags.map((tag) => (
-                  <span key={tag} className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-[10px]">{tag}</span>
+                  <span key={tag} className="px-2 py-0.5 bg-white/20 text-white/80 rounded text-[10px]">{tag}</span>
                 ))}
               </div>
             )}
