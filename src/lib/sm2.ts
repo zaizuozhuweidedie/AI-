@@ -81,8 +81,8 @@ export function isCardDueForReview(card: { nextReviewAt: Date }): boolean {
 export type CardRating = 1 | 2 | 3 | 4
 
 export const RATING_LABELS: Record<CardRating, { label: string; description: string; color: string }> = {
-  1: { label: 'Again', description: '完全忘了', color: 'bg-red-500 hover:bg-red-600' },
-  2: { label: 'Hard', description: '很困难', color: 'bg-orange-500 hover:bg-orange-600' },
-  3: { label: 'Good', description: '正常记住', color: 'bg-green-500 hover:bg-green-600' },
-  4: { label: 'Easy', description: '非常轻松', color: 'bg-blue-500 hover:bg-blue-600' },
+  1: { label: 'Again', description: '完全忘了', color: 'bg-red-600 hover:bg-red-700' },
+  2: { label: 'Hard', description: '很困难', color: 'bg-orange-500 hover:bg-orange-700' },
+  3: { label: 'Good', description: '正常记住', color: 'bg-emerald-600 hover:bg-emerald-700' },
+  4: { label: 'Easy', description: '非常轻松', color: 'bg-sky-600 hover:bg-sky-700' },
 }

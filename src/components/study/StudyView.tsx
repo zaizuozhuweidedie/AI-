@@ -168,7 +168,7 @@ export default function StudyView({ cards: initialCards, decks }: StudyViewProps
       </div>
 
       <div className="perspective">
-        <div className="relative bg-gray-50 border border-gray-200 rounded-2xl min-h-[300px] cursor-pointer shadow-sm" onClick={() => !flipped && setFlipped(true)}>
+        <div className="relative bg-white border border-gray-300 rounded-2xl min-h-[300px] cursor-pointer shadow-md" onClick={() => !flipped && setFlipped(true)}>
           <div className={`absolute inset-0 p-8 flex flex-col items-center justify-center transition-opacity duration-300 ${flipped ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             <div className="text-sm text-gray-400 mb-3">{currentCard.deck.name}</div>
             <p className="text-xl text-gray-900 text-center leading-relaxed max-w-lg">{currentCard.front}</p>
@@ -196,7 +196,7 @@ export default function StudyView({ cards: initialCards, decks }: StudyViewProps
               key={key}
               onClick={() => handleReview(Number(key) as CardRating)}
               disabled={isSubmitting}
-              className={`${rating.color} text-white rounded-xl py-3 px-2 text-center transition disabled:opacity-50 border border-black/10`}
+              className={`${rating.color} text-white rounded-xl py-3 px-2 text-center transition disabled:opacity-50 shadow-sm`}
             >
               <div className="font-semibold text-sm">{rating.label}</div>
               <div className="text-[10px] opacity-80">{rating.description}</div>
